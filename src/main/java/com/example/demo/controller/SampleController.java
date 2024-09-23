@@ -1,9 +1,15 @@
 package com.example.demo.controller;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.example.demo.dto.SampleDTO;
 
 @Controller
 @RequestMapping("/sample")
@@ -28,4 +34,21 @@ public class SampleController {
 		// model 객체에 데이터를 여러번 담을 수 있음
 	}
 
+	@GetMapping("/ex04")
+	public void ex4(Model model) {
+		SampleDTO sampleDTO = new SampleDTO(1, "hello", LocalDate.now());
+		model.addAttribute("dto", sampleDTO); // 화면에 객체 전달
+	}
+
+	// @GetMapping에 {}를 사용하여 여러 URL을 처리할 수 있음
+	// 예: /ex5, /ex6, /ex7, /ex8 요청이 들어오면 동일한 메소드가 호출됨
+	// URL은 다르지만 화면에 동일한 데이터를 전달
+	@GetMapping({"/ex05", "/ex06", "/ex07", "/ex08"})
+	public void ex5(Model model) {
+		List<SampleDTO> list = new ArrayList<>();
+		list.add(new SampleDTO(1, "aaa", LocalDate.now()));
+		list.add(new SampleDTO(2, "bbb", LocalDate.now()));
+		list.add(new SampleDTO(3, "ccc", LocalDate.now()));
+		model.addAttribute("list", list); // 화면에 리스트 전달
+	}
 }
