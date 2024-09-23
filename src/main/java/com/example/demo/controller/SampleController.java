@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,7 +36,7 @@ public class SampleController {
 	}
 
 	@GetMapping("/ex04")
-	public void ex4(Model model) {
+	public void ex04(Model model) {
 		SampleDTO sampleDTO = new SampleDTO(1, "hello", LocalDate.now());
 		model.addAttribute("dto", sampleDTO); // 화면에 객체 전달
 	}
@@ -44,11 +45,33 @@ public class SampleController {
 	// 예: /ex5, /ex6, /ex7, /ex8 요청이 들어오면 동일한 메소드가 호출됨
 	// URL은 다르지만 화면에 동일한 데이터를 전달
 	@GetMapping({"/ex05", "/ex06", "/ex07", "/ex08"})
-	public void ex5(Model model) {
+	public void ex05(Model model) {
 		List<SampleDTO> list = new ArrayList<>();
 		list.add(new SampleDTO(1, "aaa", LocalDate.now()));
 		list.add(new SampleDTO(2, "bbb", LocalDate.now()));
 		list.add(new SampleDTO(3, "ccc", LocalDate.now()));
 		model.addAttribute("list", list); // 화면에 리스트 전달
 	}
+
+    @GetMapping("/ex09")
+    public void ex09(Model model){
+    	List<SampleDTO> list = new ArrayList();
+    	for(int i=1; i<=20;i++) {
+    		list.add(new SampleDTO(i, i+"번", LocalDate.now()));
+    	}
+    	model.addAttribute("list", list);
+    }
+
+	@GetMapping("/ex10")
+	public void ex10(Model model) {
+		SampleDTO sampleDTO = new SampleDTO(1, "aaa", LocalDate.now());
+		model.addAttribute("result", "success"); // 화면에 문자열 전달
+		model.addAttribute("dto", sampleDTO); // 화면에 객체 전달
+	}
+
+	@GetMapping("/ex11")
+	public void ex11(Model model) {
+		model.addAttribute("date", LocalDateTime.now()); // 화면에 현재시간 전달
+	}
+
 }
