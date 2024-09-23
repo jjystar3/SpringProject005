@@ -7,6 +7,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.demo.dto.BookDTO;
+import com.example.demo.dto.PersonDTO;
+
 @Controller
 @RequestMapping("/quiz")
 public class QuizController {
@@ -27,8 +30,13 @@ public class QuizController {
 
 	@GetMapping("/q03")
 	public void q03(Model model) {
-		model.addAttribute("msg1", "안녕하세요");
-		model.addAttribute("msg2", "반가워요");
+		PersonDTO personDTO = new PersonDTO("둘리", 20, "인천 구월동");
+		model.addAttribute("dto", personDTO);
 	}
 
+	@GetMapping("/q04")
+	public void q04(Model model) {
+		BookDTO bookDTO = new BookDTO("스프링부트웹프로젝트", "구멍가게코딩단", LocalDate.of(2022,12,25));
+		model.addAttribute("dto", bookDTO);
+	}
 }
